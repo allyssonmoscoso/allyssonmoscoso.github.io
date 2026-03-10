@@ -1,0 +1,38 @@
+---
+import ContactSection from './portfolio/ContactSection.astro';
+import SiteFooter from './portfolio/SiteFooter.astro';
+import HeroSection from './portfolio/HeroSection.astro';
+import ProjectsSection from './portfolio/ProjectsSection.astro';
+import SiteHeader from './portfolio/SiteHeader.astro';
+import TimelineSection from './portfolio/TimelineSection.astro';
+import type { Locale, PageContent } from '../data/portfolio';
+
+interface Props {
+	locale: Locale;
+	content: PageContent;
+}
+
+const { locale, content } = Astro.props;
+
+const localeLinks = [
+	{ href: '/es/', label: 'ES', isActive: locale === 'es' },
+	{ href: '/en/', label: 'EN', isActive: locale === 'en' },
+];
+---
+
+<div class="site-shell">
+	<SiteHeader
+		brand={content.navigation.brand}
+		brandTag={content.navigation.brandTag}
+		navigation={content.navigation}
+		localeLinks={localeLinks}
+	/>
+	<main id="content" class="page-main">
+		<HeroSection content={content.hero} />
+		<TimelineSection section={content.experience} />
+		<TimelineSection section={content.education} />
+		<ProjectsSection section={content.projects} />
+		<ContactSection section={content.contact} />
+	</main>
+	<SiteFooter content={content.footer} />
+</div>

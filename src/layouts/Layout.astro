@@ -1,58 +1,428 @@
 ---
-
-import {  getRelativeLocaleUrlList } from 'astro:i18n';
+import '@fontsource/press-start-2p';
 
 interface Props {
 	title: string;
-	language: string;
+	description: string;
+	language: 'es' | 'en';
+	canonicalPath: string;
+	ogImage?: string;
 }
 
-const {language} = Astro.props;
-const { title } = Astro.props;
+const {
+	title,
+	description,
+	language,
+	canonicalPath,
+	ogImage = '/social-card.svg',
+} = Astro.props;
+
+const siteUrl = Astro.site ?? new URL('https://allyssonmoscoso.github.io');
+const canonicalUrl = new URL(canonicalPath, siteUrl).toString();
+const ogImageUrl = new URL(ogImage, siteUrl).toString();
+const localeAlternates = [
+	{ hrefLang: 'es', href: new URL('/es/', siteUrl).toString() },
+	{ hrefLang: 'en', href: new URL('/en/', siteUrl).toString() },
+	{ hrefLang: 'x-default', href: new URL('/', siteUrl).toString() },
+];
+const localeMap = {
+	es: 'es_DO',
+	en: 'en_US',
+};
 ---
 
 <!doctype html>
 <html lang={language}>
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content={description} />
 		<meta name="generator" content={Astro.generator} />
+		<meta name="theme-color" content="#04070b" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="canonical" href={canonicalUrl} />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
+			rel="stylesheet"
+		/>
+		{
+			localeAlternates.map((entry) => (
+				<link rel="alternate" hreflang={entry.hrefLang} href={entry.href} />
+			))
+		}
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="Allysson Moscoso" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonicalUrl} />
+		<meta property="og:image" content={ogImageUrl} />
+		<meta property="og:locale" content={localeMap[language]} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={ogImageUrl} />
 		<title>{title}</title>
 	</head>
-	<>
-		
+	<body>
+		<a class="skip-link" href="#content">Skip to content</a>
 		<slot />
-		<script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.0/flowbite.min.js"></script>
 	</body>
 </html>
+
 <style is:global>
 	:root {
-		--accent: 136, 58, 234;
-		--accent-light: 224, 204, 250;
-		--accent-dark: 49, 10, 101;
-		--accent-gradient: linear-gradient(
-			45deg,
-			rgb(var(--accent)),
-			rgb(var(--accent-light)) 30%,
-			white 60%
-		);
+		--bg: #04070b;
+		--bg-elevated: rgba(8, 13, 21, 0.82);
+		--panel: rgba(11, 17, 27, 0.9);
+		--panel-soft: rgba(255, 255, 255, 0.03);
+		--border: rgba(112, 245, 255, 0.18);
+		--border-strong: rgba(255, 82, 146, 0.28);
+		--text: #f4f7fb;
+		--text-muted: #95a6bc;
+		--accent: #70f5ff;
+		--accent-soft: rgba(112, 245, 255, 0.12);
+		--accent-rose: #ff5292;
+		--accent-warm: #ffe082;
+		--shadow: 0 30px 80px rgba(0, 0, 0, 0.34);
+		--radius: 1.55rem;
+		--container: 1120px;
+		--font-display: 'Press Start 2P', sans-serif;
+		--font-body: 'IBM Plex Sans', 'Segoe UI', sans-serif;
+		--font-mono: 'IBM Plex Mono', 'Fira Code', monospace;
 	}
+
 	html {
-		font-family: 'Press Start 2P', sans-serif;
-		background: #13151a;
-		background-size: 224px;
+		color-scheme: dark;
+		scroll-behavior: smooth;
+		background: var(--bg);
+		font-family: var(--font-body);
+		overflow-x: hidden;
 	}
-	code {
-		font-family:
-			Menlo,
-			Monaco,
-			Lucida Console,
-			Liberation Mono,
-			DejaVu Sans Mono,
-			Bitstream Vera Sans Mono,
-			Courier New,
-			monospace;
+
+	body {
+		position: relative;
+		min-height: 100vh;
+		margin: 0;
+		color: var(--text);
+		background:
+			radial-gradient(circle at 14% 12%, rgba(112, 245, 255, 0.1), transparent 22%),
+			radial-gradient(circle at 88% 18%, rgba(255, 82, 146, 0.12), transparent 18%),
+			linear-gradient(180deg, #060a0f 0%, #09121b 48%, #04070b 100%);
+		overflow-x: hidden;
+		-webkit-tap-highlight-color: rgba(112, 245, 255, 0.24);
+	}
+
+	body::before {
+		content: '';
+		position: fixed;
+		inset: 0;
+		background-image:
+			linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+			linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+		background-size: 36px 36px;
+		mask-image: linear-gradient(180deg, rgba(255, 255, 255, 0.42), transparent 88%);
+		opacity: 0.16;
+		pointer-events: none;
+	}
+
+	body::after {
+		content: '';
+		position: fixed;
+		inset: 0;
+		background: repeating-linear-gradient(
+			180deg,
+			rgba(255, 255, 255, 0.012) 0,
+			rgba(255, 255, 255, 0.012) 1px,
+			transparent 1px,
+			transparent 4px
+		);
+		opacity: 0.16;
+		mix-blend-mode: soft-light;
+		pointer-events: none;
+	}
+
+	* {
+		box-sizing: border-box;
+	}
+
+	a,
+	button,
+	summary {
+		touch-action: manipulation;
+	}
+
+	a {
+		color: inherit;
+		text-decoration: none;
+	}
+
+	h1,
+	h2,
+	h3 {
+		text-wrap: balance;
+	}
+
+	p,
+	li,
+	dd {
+		text-wrap: pretty;
+	}
+
+	img,
+	svg {
+		display: block;
+		max-width: 100%;
+	}
+
+	::selection {
+		background: rgba(112, 245, 255, 0.26);
+		color: var(--text);
+	}
+
+	:focus-visible {
+		outline: 2px solid var(--accent);
+		outline-offset: 3px;
+	}
+
+	.skip-link {
+		position: fixed;
+		top: 1rem;
+		left: 1rem;
+		z-index: 100;
+		padding: 0.8rem 1rem;
+		border-radius: 999px;
+		background: var(--accent);
+		color: #041017;
+		font-weight: 700;
+		transform: translateY(-180%);
+		transition: transform 0.2s ease;
+	}
+
+	.skip-link:focus-visible {
+		transform: translateY(0);
+	}
+
+	main {
+		display: block;
+	}
+
+	section[id] {
+		scroll-margin-top: 7rem;
+	}
+
+	.site-shell {
+		position: relative;
+		padding-inline: 1rem;
+	}
+
+	.page-main {
+		width: min(var(--container), calc(100vw - 2rem));
+		margin: 0 auto;
+		padding: 0 0 2rem;
+		display: grid;
+		gap: 1.35rem;
+	}
+
+	.section-shell {
+		position: relative;
+		overflow: hidden;
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		background: linear-gradient(180deg, rgba(8, 13, 21, 0.96), rgba(8, 12, 18, 0.82));
+		box-shadow: var(--shadow);
+		backdrop-filter: blur(14px);
+		transition:
+			border-color 0.24s ease,
+			transform 0.24s ease,
+			box-shadow 0.24s ease;
+	}
+
+	.section-shell:hover {
+		border-color: rgba(112, 245, 255, 0.22);
+	}
+
+	.section-shell::before {
+		content: '';
+		position: absolute;
+		inset: auto auto -6rem -4rem;
+		width: 18rem;
+		height: 18rem;
+		border-radius: 50%;
+		background: radial-gradient(circle, rgba(112, 245, 255, 0.18), transparent 70%);
+		pointer-events: none;
+	}
+
+	.section-shell::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(135deg, rgba(255, 82, 146, 0.08), transparent 30%, transparent 70%, rgba(112, 245, 255, 0.05));
+		pointer-events: none;
+	}
+
+	.surface-card {
+		border: 1px solid rgba(255, 255, 255, 0.08);
+		border-radius: 1.2rem;
+		background: rgba(255, 255, 255, 0.03);
+		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+		backdrop-filter: blur(10px);
+	}
+
+	.eyebrow {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.65rem;
+		margin: 0;
+		font-family: var(--font-display);
+		font-size: 0.6rem;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--accent);
+	}
+
+	.eyebrow::before {
+		content: '';
+		width: 0.95rem;
+		height: 0.95rem;
+		border-radius: 0.3rem;
+		border: 1px solid rgba(112, 245, 255, 0.18);
+		background:
+			linear-gradient(135deg, rgba(112, 245, 255, 0.25), transparent),
+			rgba(255, 255, 255, 0.03);
+	}
+
+	.button {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.65rem;
+		padding: 0.88rem 1.15rem;
+		border-radius: 999px;
+		border: 1px solid transparent;
+		font-weight: 700;
+		transition:
+			background-color 0.2s ease,
+			border-color 0.2s ease,
+			color 0.2s ease,
+			box-shadow 0.2s ease,
+			transform 0.2s ease;
+	}
+
+	.button:hover,
+	.button:focus-visible {
+		transform: translateY(-1px);
+	}
+
+	.button--primary {
+		background: var(--accent);
+		color: #041017;
+		box-shadow: 0 16px 32px rgba(112, 245, 255, 0.22);
+	}
+
+	.button--primary:hover,
+	.button--primary:focus-visible {
+		box-shadow: 0 22px 40px rgba(112, 245, 255, 0.28);
+	}
+
+	.button--secondary {
+		border-color: rgba(112, 245, 255, 0.18);
+		background: rgba(255, 255, 255, 0.03);
+		color: var(--text);
+	}
+
+	.button--secondary:hover,
+	.button--secondary:focus-visible {
+		background: rgba(112, 245, 255, 0.09);
+		color: var(--accent);
+	}
+
+	.chip-list {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.65rem;
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	.chip {
+		padding: 0.58rem 0.84rem;
+		border-radius: 999px;
+		border: 1px solid rgba(112, 245, 255, 0.16);
+		background: rgba(255, 255, 255, 0.04);
+		font-family: var(--font-mono);
+		font-size: 0.82rem;
+		color: var(--text-muted);
+	}
+
+	@keyframes rise-in {
+		from {
+			opacity: 0;
+			transform: translateY(18px);
+		}
+
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		html {
+			scroll-behavior: auto;
+		}
+
+		*,
+		*::before,
+		*::after {
+			animation: none !important;
+			transition: none !important;
+		}
+	}
+
+	@media (max-width: 640px) {
+		.site-shell {
+			padding-inline: 0.5rem;
+		}
+
+		.page-main {
+			width: auto;
+			padding-bottom: 1.35rem;
+			gap: 1rem;
+		}
+
+		.section-shell {
+			border-radius: 1.2rem;
+		}
+
+		.eyebrow {
+			font-size: 0.55rem;
+		}
+
+		.button {
+			width: 100%;
+			min-height: 3.1rem;
+		}
+
+		.chip {
+			font-size: 0.76rem;
+		}
+	}
+
+	@media (max-width: 420px) {
+		.site-shell {
+			padding-inline: 0.4rem;
+		}
+
+		.skip-link {
+			left: 0.5rem;
+			top: 0.5rem;
+		}
+
+		.section-shell {
+			border-radius: 1rem;
+		}
 	}
 </style>

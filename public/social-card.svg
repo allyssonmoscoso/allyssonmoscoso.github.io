@@ -1,0 +1,52 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Allysson Moscoso Portfolio</title>
+  <desc id="desc">Retro-ops social preview card for Allysson Moscoso's portfolio.</desc>
+  <defs>
+    <linearGradient id="bg" x1="88" y1="58" x2="1060" y2="590" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#071018" />
+      <stop offset="1" stop-color="#04070B" />
+    </linearGradient>
+    <linearGradient id="panel" x1="157" y1="100" x2="1006" y2="558" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0E1624" stop-opacity="0.95" />
+      <stop offset="1" stop-color="#09111D" stop-opacity="0.9" />
+    </linearGradient>
+    <linearGradient id="stroke" x1="159" y1="92" x2="1012" y2="563" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#70F5FF" stop-opacity="0.5" />
+      <stop offset="1" stop-color="#FF5292" stop-opacity="0.38" />
+    </linearGradient>
+    <radialGradient id="glowA" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(280 98) rotate(60) scale(230 310)">
+      <stop stop-color="#70F5FF" stop-opacity="0.35" />
+      <stop offset="1" stop-color="#70F5FF" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="glowB" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(990 170) rotate(120) scale(250 310)">
+      <stop stop-color="#FF5292" stop-opacity="0.25" />
+      <stop offset="1" stop-color="#FF5292" stop-opacity="0" />
+    </radialGradient>
+    <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse">
+      <path d="M28 0H0V28" stroke="white" stroke-opacity="0.08" />
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="630" fill="#04070B" />
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <rect width="1200" height="630" fill="url(#grid)" opacity="0.3" />
+  <circle cx="250" cy="90" r="260" fill="url(#glowA)" />
+  <circle cx="960" cy="180" r="240" fill="url(#glowB)" />
+
+  <rect x="92" y="72" width="1016" height="486" rx="34" fill="url(#panel)" stroke="url(#stroke)" stroke-width="2" />
+  <rect x="128" y="110" width="210" height="44" rx="22" fill="#0F1C29" stroke="#2A4B57" />
+  <circle cx="156" cy="132" r="7" fill="#FFE082" />
+  <text x="176" y="138" fill="#C8D4E3" font-family="'IBM Plex Mono', monospace" font-size="18" letter-spacing="2">PORTFOLIO // RELIABILITY ENGINEERING</text>
+
+  <text x="128" y="248" fill="#F4F7FB" font-family="'IBM Plex Sans', sans-serif" font-size="74" font-weight="700" letter-spacing="-3">ALLYSSON</text>
+  <text x="128" y="330" fill="#70F5FF" font-family="'IBM Plex Sans', sans-serif" font-size="86" font-weight="700" letter-spacing="-4">MOSCOSO</text>
+
+  <text x="128" y="394" fill="#C8D4E3" font-family="'IBM Plex Sans', sans-serif" font-size="28" font-weight="500">Senior SRE // Backend // Automation // Oracle // .NET</text>
+  <text x="128" y="456" fill="#8FA0B6" font-family="'IBM Plex Sans', sans-serif" font-size="26">Reliable systems, operational excellence and pragmatic engineering.</text>
+
+  <rect x="742" y="314" width="294" height="164" rx="24" fill="#0C1723" stroke="#24404D" />
+  <text x="774" y="356" fill="#FFE082" font-family="'IBM Plex Mono', monospace" font-size="18" letter-spacing="2">FOCUS</text>
+  <text x="774" y="392" fill="#F4F7FB" font-family="'IBM Plex Sans', sans-serif" font-size="30" font-weight="600">Automation</text>
+  <text x="774" y="428" fill="#F4F7FB" font-family="'IBM Plex Sans', sans-serif" font-size="30" font-weight="600">Observability</text>
+  <text x="774" y="464" fill="#F4F7FB" font-family="'IBM Plex Sans', sans-serif" font-size="30" font-weight="600">Backend Delivery</text>
+</svg>

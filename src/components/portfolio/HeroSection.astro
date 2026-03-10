@@ -1,0 +1,400 @@
+---
+import type { HeroContent } from '../../data/portfolio';
+
+interface Props {
+	content: HeroContent;
+}
+
+const { content } = Astro.props;
+---
+
+<section id="about" class="section-shell hero-shell">
+	<div class="hero-grid">
+		<div class="hero-copy hero-animate">
+			<p class="eyebrow">{content.badge}</p>
+			<div class="hero-status-row">
+				<p class="hero-status">{content.status}</p>
+			</div>
+			<h1 class="hero-title">{content.name}</h1>
+			<p class="hero-role">{content.role}</p>
+			<p class="hero-summary">{content.summary}</p>
+			<div class="hero-actions">
+				{
+					content.actions.map((action) => (
+						<a
+							class={`button ${action.variant === 'secondary' ? 'button--secondary' : 'button--primary'}`}
+							href={action.href}
+						>
+							{action.label}
+						</a>
+					))
+				}
+			</div>
+			<div class="hero-stats-ribbon surface-card" aria-label={content.statsTitle}>
+				<p class="hero-panel__title">{content.statsTitle}</p>
+				<dl class="hero-stats-ribbon__grid">
+					{
+						content.stats.map((item) => (
+							<div>
+								<dt>{item.label}</dt>
+								<dd>{item.value}</dd>
+							</div>
+						))
+					}
+				</dl>
+			</div>
+		</div>
+
+		<aside class="hero-panel hero-panel--animate" aria-label={content.focusTitle}>
+			<div class="surface-card hero-terminal">
+				<div class="hero-terminal__chrome" aria-hidden="true">
+					<span></span>
+					<span></span>
+					<span></span>
+				</div>
+				<p class="hero-panel__title">{content.currentTitle}</p>
+				<p class="hero-terminal__summary">{content.currentSummary}</p>
+				<dl class="hero-terminal__stats">
+					{
+						content.stats.map((item) => (
+							<div>
+								<dt>{item.label}</dt>
+								<dd>{item.value}</dd>
+							</div>
+						))
+					}
+				</dl>
+			</div>
+
+			<div class="hero-panel__columns">
+				<div class="surface-card hero-subpanel hero-panel__group">
+				<p class="hero-panel__title">{content.focusTitle}</p>
+				<ul class="chip-list">
+					{
+						content.focusItems.map((item) => (
+							<li class="chip">{item}</li>
+						))
+					}
+				</ul>
+				</div>
+
+				<div class="surface-card hero-subpanel hero-panel__group">
+					<p class="hero-panel__title">{content.principlesTitle}</p>
+					<ul class="hero-principles">
+						{
+							content.principles.map((item) => (
+								<li>{item}</li>
+							))
+						}
+					</ul>
+				</div>
+			</div>
+		</aside>
+	</div>
+</section>
+
+<style>
+	.hero-shell {
+		padding: clamp(1.4rem, 4vw, 3rem);
+	}
+
+	.hero-grid {
+		display: grid;
+		grid-template-columns: minmax(0, 1.2fr) minmax(18rem, 0.8fr);
+		gap: clamp(1.2rem, 3vw, 2rem);
+		align-items: stretch;
+	}
+
+	.hero-animate {
+		animation: rise-in 0.7s ease both;
+	}
+
+	.hero-panel--animate {
+		animation: rise-in 0.7s ease 0.14s both;
+	}
+
+	.hero-copy {
+		display: grid;
+		align-content: center;
+	}
+
+	.hero-status-row {
+		margin: 1rem 0 1.15rem;
+	}
+
+	.hero-status {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.65rem;
+		margin: 0;
+		padding: 0.7rem 1rem;
+		border-radius: 999px;
+		border: 1px solid rgba(255, 224, 130, 0.22);
+		background: rgba(255, 224, 130, 0.08);
+		font-family: var(--font-mono);
+		font-size: 0.87rem;
+		color: var(--text-muted);
+	}
+
+	.hero-status::before {
+		content: '';
+		width: 0.7rem;
+		height: 0.7rem;
+		border-radius: 50%;
+		background: var(--accent-warm);
+		box-shadow: 0 0 18px rgba(255, 224, 130, 0.45);
+	}
+
+	.hero-title {
+		margin: 0;
+		max-width: 10ch;
+		font-size: clamp(2.9rem, 8vw, 5.6rem);
+		line-height: 0.94;
+		letter-spacing: -0.06em;
+		text-wrap: balance;
+	}
+
+	.hero-role {
+		margin: 1rem 0 0;
+		max-width: 28ch;
+		font-size: clamp(1.18rem, 2.2vw, 1.6rem);
+		line-height: 1.35;
+		color: var(--text);
+	}
+
+	.hero-summary {
+		max-width: 62ch;
+		margin: 1.2rem 0 0;
+		font-size: 1.05rem;
+		line-height: 1.8;
+		color: var(--text-muted);
+	}
+
+	.hero-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.85rem;
+		margin-top: 2rem;
+	}
+
+	.hero-stats-ribbon {
+		margin-top: 1.15rem;
+		padding: 1rem 1.05rem;
+	}
+
+	.hero-stats-ribbon__grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 0.85rem 1rem;
+		margin: 0.8rem 0 0;
+	}
+
+	.hero-stats-ribbon__grid div,
+	.hero-terminal__stats div {
+		min-width: 0;
+	}
+
+	.hero-stats-ribbon__grid dt,
+	.hero-terminal__stats dt {
+		font-family: var(--font-mono);
+		font-size: 0.78rem;
+		color: var(--text-muted);
+	}
+
+	.hero-stats-ribbon__grid dd,
+	.hero-terminal__stats dd {
+		margin: 0.25rem 0 0;
+		font-size: 0.95rem;
+		font-weight: 600;
+		line-height: 1.45;
+	}
+
+	.hero-panel {
+		display: grid;
+		align-content: start;
+		gap: 1.2rem;
+	}
+
+	.hero-terminal {
+		position: relative;
+		overflow: hidden;
+		padding: 1.2rem;
+		background:
+			linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02)),
+			radial-gradient(circle at top right, rgba(255, 82, 146, 0.16), transparent 38%),
+			rgba(255, 255, 255, 0.03);
+	}
+
+	.hero-terminal::after {
+		content: '';
+		position: absolute;
+		inset: auto -15% -35% auto;
+		width: 14rem;
+		height: 14rem;
+		border-radius: 50%;
+		background: radial-gradient(circle, rgba(112, 245, 255, 0.16), transparent 70%);
+		pointer-events: none;
+	}
+
+	.hero-terminal__chrome {
+		display: inline-flex;
+		gap: 0.4rem;
+		margin-bottom: 1rem;
+	}
+
+	.hero-terminal__chrome span {
+		width: 0.65rem;
+		height: 0.65rem;
+		border-radius: 50%;
+		background: rgba(255, 255, 255, 0.18);
+	}
+
+	.hero-terminal__chrome span:first-child {
+		background: #ff7b72;
+	}
+
+	.hero-terminal__chrome span:nth-child(2) {
+		background: #ffe082;
+	}
+
+	.hero-terminal__chrome span:last-child {
+		background: #70f5ff;
+	}
+
+	.hero-terminal__summary {
+		margin: 0;
+		max-width: 42ch;
+		line-height: 1.75;
+		color: var(--text-muted);
+	}
+
+	.hero-terminal__stats {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1rem 1.2rem;
+		margin: 1.2rem 0 0;
+	}
+
+	.hero-panel__columns {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1rem;
+	}
+
+	.hero-panel__group {
+		display: grid;
+		gap: 0.9rem;
+	}
+
+	.hero-subpanel {
+		padding: 1rem;
+	}
+
+	.hero-panel__title {
+		margin: 0;
+		font-family: var(--font-display);
+		font-size: 0.62rem;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--accent-warm);
+	}
+
+	.hero-principles {
+		margin: 0;
+		color: var(--text-muted);
+		line-height: 1.75;
+	}
+
+	.hero-principles {
+		padding-left: 1.15rem;
+	}
+
+	.hero-principles li + li {
+		margin-top: 0.65rem;
+	}
+
+	@media (max-width: 860px) {
+		.hero-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.hero-title {
+			max-width: none;
+		}
+
+		.hero-panel__columns {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	@media (max-width: 520px) {
+		.hero-shell {
+			padding: 1.1rem;
+		}
+
+		.hero-status-row {
+			margin: 0.9rem 0 1rem;
+		}
+
+		.hero-status {
+			width: 100%;
+			align-items: flex-start;
+			padding: 0.8rem 0.9rem;
+			border-radius: 1rem;
+			line-height: 1.55;
+		}
+
+		.hero-title {
+			font-size: clamp(2.35rem, 12vw, 3.25rem);
+			line-height: 0.98;
+		}
+
+		.hero-role {
+			max-width: none;
+			font-size: 1.05rem;
+			line-height: 1.45;
+		}
+
+		.hero-summary {
+			font-size: 0.98rem;
+			line-height: 1.72;
+		}
+
+		.hero-actions {
+			display: grid;
+			grid-template-columns: 1fr;
+			gap: 0.7rem;
+			margin-top: 1.5rem;
+		}
+
+		.hero-stats-ribbon,
+		.hero-terminal,
+		.hero-subpanel {
+			padding: 0.95rem;
+		}
+
+		.hero-panel {
+			gap: 0.9rem;
+		}
+
+		.hero-stats-ribbon__grid,
+		.hero-terminal__stats {
+			grid-template-columns: 1fr;
+			gap: 0.8rem;
+		}
+
+		.hero-principles {
+			padding-left: 1rem;
+		}
+	}
+
+	@media (max-width: 380px) {
+		.hero-title {
+			font-size: 2.05rem;
+		}
+
+		.hero-panel__title {
+			font-size: 0.56rem;
+		}
+	}
+</style>

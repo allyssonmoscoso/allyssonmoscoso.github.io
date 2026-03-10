@@ -1,0 +1,54 @@
+<svg width="1200" height="720" viewBox="0 0 1200 720" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">NNPPSS preview card</title>
+  <desc id="desc">Stylized desktop preview for NNPPSS with a download manager interface and progress bars.</desc>
+  <defs>
+    <linearGradient id="bg" x1="108" y1="76" x2="1042" y2="654" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#111226"/>
+      <stop offset="1" stop-color="#07090D"/>
+    </linearGradient>
+    <linearGradient id="app" x1="166" y1="126" x2="1008" y2="590" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#141D2A"/>
+      <stop offset="1" stop-color="#0B121B"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="720" rx="36" fill="#04070B"/>
+  <rect width="1200" height="720" fill="url(#bg)"/>
+  <circle cx="1000" cy="120" r="180" fill="#FF5292" fill-opacity="0.12"/>
+  <circle cx="210" cy="110" r="170" fill="#70F5FF" fill-opacity="0.12"/>
+
+  <rect x="128" y="92" width="944" height="536" rx="30" fill="url(#app)" stroke="#263A49" stroke-width="2"/>
+  <rect x="128" y="92" width="944" height="54" rx="30" fill="#101724"/>
+  <circle cx="168" cy="119" r="8" fill="#FF7B72"/>
+  <circle cx="198" cy="119" r="8" fill="#FFE082"/>
+  <circle cx="228" cy="119" r="8" fill="#70F5FF"/>
+  <text x="274" y="126" fill="#FFE082" font-family="IBM Plex Mono, monospace" font-size="20" letter-spacing="2">NNPPSS // JAVA 17</text>
+
+  <rect x="160" y="178" width="214" height="404" rx="22" fill="#0C1520" stroke="#223544"/>
+  <text x="194" y="222" fill="#F4F7FB" font-family="IBM Plex Sans, sans-serif" font-size="30" font-weight="600">Queues</text>
+  <rect x="194" y="258" width="146" height="18" rx="9" fill="#70F5FF" fill-opacity="0.24"/>
+  <rect x="194" y="300" width="128" height="18" rx="9" fill="#FFFFFF" fill-opacity="0.12"/>
+  <rect x="194" y="342" width="154" height="18" rx="9" fill="#FFFFFF" fill-opacity="0.12"/>
+  <rect x="194" y="410" width="146" height="110" rx="18" fill="#121E2B" stroke="#2B4050"/>
+  <text x="218" y="454" fill="#95A6BC" font-family="IBM Plex Sans, sans-serif" font-size="24">Config</text>
+  <text x="218" y="490" fill="#F4F7FB" font-family="IBM Plex Sans, sans-serif" font-size="20">Concurrent downloads</text>
+  <text x="218" y="522" fill="#70F5FF" font-family="IBM Plex Mono, monospace" font-size="22">1 - 4</text>
+
+  <rect x="410" y="178" width="630" height="404" rx="22" fill="#0C1520" stroke="#223544"/>
+  <text x="446" y="222" fill="#F4F7FB" font-family="IBM Plex Sans, sans-serif" font-size="30" font-weight="600">Active Downloads</text>
+  <text x="446" y="256" fill="#95A6BC" font-family="IBM Plex Sans, sans-serif" font-size="22">Persistent sessions, retries and automatic extraction.</text>
+
+  <rect x="446" y="294" width="558" height="88" rx="20" fill="#131F2D" stroke="#284152"/>
+  <text x="476" y="328" fill="#F4F7FB" font-family="IBM Plex Sans, sans-serif" font-size="24" font-weight="600">Package A</text>
+  <rect x="476" y="344" width="460" height="14" rx="7" fill="#FFFFFF" fill-opacity="0.1"/>
+  <rect x="476" y="344" width="336" height="14" rx="7" fill="#70F5FF"/>
+  <text x="952" y="355" fill="#70F5FF" font-family="IBM Plex Mono, monospace" font-size="18">73%</text>
+
+  <rect x="446" y="400" width="558" height="88" rx="20" fill="#131F2D" stroke="#284152"/>
+  <text x="476" y="434" fill="#F4F7FB" font-family="IBM Plex Sans, sans-serif" font-size="24" font-weight="600">Package B</text>
+  <rect x="476" y="450" width="460" height="14" rx="7" fill="#FFFFFF" fill-opacity="0.1"/>
+  <rect x="476" y="450" width="214" height="14" rx="7" fill="#FF5292"/>
+  <text x="952" y="461" fill="#FF5292" font-family="IBM Plex Mono, monospace" font-size="18">46%</text>
+
+  <rect x="446" y="506" width="558" height="44" rx="14" fill="#101A25" stroke="#223544"/>
+  <text x="476" y="534" fill="#95A6BC" font-family="IBM Plex Sans, sans-serif" font-size="20">Auto-cleanup enabled // Speed limit configurable // Multi-platform</text>
+</svg>

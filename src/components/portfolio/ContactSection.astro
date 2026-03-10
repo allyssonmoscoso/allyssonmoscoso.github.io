@@ -1,0 +1,202 @@
+---
+import type { ContactContent } from '../../data/portfolio';
+
+interface Props {
+	section: ContactContent;
+}
+
+const { section } = Astro.props;
+---
+
+<section id={section.id} class="section-shell section-shell--contact">
+	<div class="contact-grid">
+		<div class="contact-copy">
+			<p class="eyebrow">{section.label}</p>
+			<h2>{section.title}</h2>
+			<p class="section-intro">{section.intro}</p>
+			<p class="contact-availability">{section.availability}</p>
+			<div class="contact-actions">
+				{
+					section.actions.map((action) => (
+						<a
+							class={`button ${action.variant === 'secondary' ? 'button--secondary' : 'button--primary'}`}
+							href={action.href}
+							target={action.external ? '_blank' : undefined}
+							rel={action.external ? 'noopener noreferrer' : undefined}
+						>
+							{action.label}
+						</a>
+					))
+				}
+			</div>
+		</div>
+
+		<aside class="surface-card contact-panel">
+			<p class="contact-panel__title">{section.panelTitle}</p>
+			<ul class="contact-links">
+				{
+					section.links.map((link) => (
+						<li>
+							<a href={link.href} target="_blank" rel="noopener noreferrer">
+								<span>{link.label}</span>
+								<strong>{link.value}</strong>
+							</a>
+						</li>
+					))
+				}
+			</ul>
+			<p class="contact-note">{section.note}</p>
+		</aside>
+	</div>
+</section>
+
+<style>
+	.section-shell--contact {
+		padding: clamp(1.35rem, 3.2vw, 2.4rem);
+		animation: rise-in 0.7s ease 0.12s both;
+	}
+
+	.contact-grid {
+		display: grid;
+		grid-template-columns: minmax(0, 1.15fr) minmax(18rem, 0.85fr);
+		gap: 1.2rem;
+		align-items: stretch;
+	}
+
+	.contact-copy h2 {
+		margin: 0.8rem 0 0;
+		font-size: clamp(2rem, 4vw, 3.2rem);
+		line-height: 1.04;
+		letter-spacing: -0.04em;
+	}
+
+	.contact-availability,
+	.section-intro,
+	.contact-note {
+		line-height: 1.78;
+		color: var(--text-muted);
+	}
+
+	.contact-availability {
+		max-width: 60ch;
+		margin: 1rem 0 0;
+	}
+
+	.contact-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.85rem;
+		margin-top: 1.7rem;
+	}
+
+	.contact-panel {
+		display: grid;
+		align-content: start;
+		gap: 1rem;
+		padding: 1.2rem;
+		background:
+			linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02)),
+			radial-gradient(circle at top right, rgba(112, 245, 255, 0.14), transparent 35%),
+			rgba(255, 255, 255, 0.03);
+	}
+
+	.contact-panel__title {
+		margin: 0;
+		font-family: var(--font-display);
+		font-size: 0.62rem;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--accent-warm);
+	}
+
+	.contact-links {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: grid;
+		gap: 0.65rem;
+	}
+
+	.contact-links a {
+		display: grid;
+		gap: 0.25rem;
+		padding: 0.95rem 1rem;
+		border-radius: 1rem;
+		border: 1px solid rgba(112, 245, 255, 0.12);
+		background: rgba(255, 255, 255, 0.03);
+		transition:
+			border-color 0.22s ease,
+			background-color 0.22s ease,
+			transform 0.22s ease;
+	}
+
+	.contact-links a:hover,
+	.contact-links a:focus-visible {
+		border-color: rgba(112, 245, 255, 0.2);
+		background: rgba(112, 245, 255, 0.07);
+		transform: translateY(-2px);
+	}
+
+	.contact-links span {
+		font-family: var(--font-mono);
+		font-size: 0.78rem;
+		color: var(--text-muted);
+	}
+
+	.contact-links strong {
+		font-size: 0.98rem;
+		line-height: 1.4;
+		word-break: break-word;
+	}
+
+	.contact-note {
+		margin: 0;
+		padding-top: 0.4rem;
+		border-top: 1px solid rgba(255, 255, 255, 0.06);
+	}
+
+	@media (max-width: 860px) {
+		.contact-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	@media (max-width: 640px) {
+		.section-shell--contact {
+			padding: 1.1rem;
+		}
+
+		.contact-copy h2 {
+			font-size: 1.8rem;
+		}
+
+		.section-intro,
+		.contact-availability,
+		.contact-note {
+			font-size: 0.96rem;
+			line-height: 1.68;
+		}
+
+		.contact-actions {
+			display: grid;
+			grid-template-columns: 1fr;
+			gap: 0.7rem;
+			margin-top: 1.35rem;
+		}
+
+		.contact-panel {
+			padding: 1rem;
+			gap: 0.85rem;
+		}
+
+		.contact-links a {
+			padding: 1rem;
+		}
+	}
+
+	@media (max-width: 420px) {
+		.contact-links strong {
+			font-size: 0.92rem;
+		}
+	}
+</style>
